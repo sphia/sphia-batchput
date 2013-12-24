@@ -5,6 +5,10 @@
 
 ## Installation
 
+  With [clib](https://github.com/clibs/clib), do:
+
+    $ clib install sphia/sphia
+
   With git, do:
 
     $ git clone git@github.com:sphia/sphia-batchput.git /tmp/sphia-batchput
