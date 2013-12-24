@@ -41,6 +41,8 @@ int main(int argc, char *argv[]) {
           , sp_error(db));
         free(key);
         free(value);
+        sp_destroy(db);
+        sp_destroy(env);
         return 2;
       }
       free(key);
