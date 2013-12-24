@@ -1,6 +1,6 @@
 {
   "name": "sphia-batchput",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repo": "sphia/sphia-batchput",
   "description": "Set a batch of key/value pairs",
   "keywords": [ "sophia", "sphia", "cli" ],
