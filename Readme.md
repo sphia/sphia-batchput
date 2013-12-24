@@ -7,7 +7,7 @@
 
   With [clib](https://github.com/clibs/clib), do:
 
-    $ clib install sphia/sphia
+    $ clib install sphia/sphia-batchput
 
   With git, do:
 
