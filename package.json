@@ -5,5 +5,8 @@
   "description": "Set a batch of key/value pairs",
   "keywords": [ "sophia", "sphia", "cli" ],
   "license": "MIT",
-  "install": "make install"
+  "install": "make install",
+  "dependencies": {
+    "clibs/commander": "*"
+  }
 }
