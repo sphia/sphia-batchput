@@ -14,12 +14,19 @@
     $ git clone git@github.com:sphia/sphia-batchput.git /tmp/sphia-batchput
     $ make -C /tmp/sphia-batchput make install
 
-## Usage
+## Usage Examples
 
-  Always assumes database is in `pwd`.  This will be changed someday.
+  Set a batch of key/value pairs in the database at `pwd`:
 
     $ sphia batchput key1 value1 key2 value2 key3...
 
+  Set a batch of key/value pairs in the database at `/foo/bar`:
+
+    $ sphia batchput --path /foo/bar key1 value1 key2 value2 key3...
+
+  Set a batch of key/value pairs in the database at `/foo/bar` using env flags:
+
+    $ SPHIA_PATH=/foo/bar sphia batchput key1 value1 key2 value2 key3...
 
 ## License
 

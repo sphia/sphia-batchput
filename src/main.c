@@ -7,9 +7,11 @@
 //
 
 #include <stdio.h>
-#include <sophia/sophia.h>
 #include <sophia/sp.h>
 #include "commander/commander.h"
+#include "batchput.h"
+
+#define SPHIA_BATCHPUT_VERSION "0.0.1"
 
 static void *env;
 static void *db;
@@ -55,7 +57,7 @@ main(int argc, char *argv[]) {
   command_t program;
   command_init(&program
     , "sphia-batchput"
-    , "0.0.1");
+    , SPHIA_BATCHPUT_VERSION);
   command_option(&program
     , "-p"
     , "--path <path>"
@@ -65,6 +67,7 @@ main(int argc, char *argv[]) {
 
   if (0 != program.argc % 2) {
     fprintf(stderr, "Invalid number of key/value paris\n");
+    command_free(&program);
     return 1;
   }
 
@@ -80,30 +83,18 @@ main(int argc, char *argv[]) {
   }
 
   int rc;
-  if (0 != (rc = batchput_init())) return rc;
-
-  for (int i = 0; i < program.argc; i += 2) {
-    char *key = strdup(program.argv[i]);
-    char *value = strdup(program.argv[i + 1]);
-
-    rc = sp_set(db, key, strlen(key), value, strlen(value));
-    if (-1 == rc) {
-      fprintf(stderr
-        , "An error occured setting key '%s'. %s"
-        , key
-        , sp_error(db));
-      free(key);
-      free(value);
-      sp_destroy(db);
-      sp_destroy(env);
-      return 1;
-    }
-
-    free(key);
-    free(value);
+  if (0 != (rc = batchput_init())) {
+    command_free(&program);
+    return 1;
   }
 
+  rc = sphia_batchput(db, program.argc, program.argv);
+
+  command_free(&program);
   sp_destroy(db);
   sp_destroy(env);
-  return 0;
+
+  return -1 == rc
+    ? 1
+    : 0;
 }
