@@ -17,4 +17,10 @@ install: $(BIN)
 uninstall:
 	rm -f $(PREFIX)/bin/$(BIN)
 
-.PHONY: install uninstall
+test: $(BIN)
+	./test.sh
+
+clean:
+	rm -f $(BIN)
+
+.PHONY: install uninstall test clean
